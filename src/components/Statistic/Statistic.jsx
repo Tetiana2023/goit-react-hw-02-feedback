@@ -1,8 +1,7 @@
-//  import { Statistic } from '../components/Statistic/Statistic'
 import React from 'react';
-// import css from './Statistic.module.css';
+import css from './Statistic.module.css';
 
-export class  App extends React.Component {
+export class Statistic extends React.Component {
   state = {
     good: 0,
     neutral: 0,
@@ -31,11 +30,10 @@ export class  App extends React.Component {
       };
     });
   };
-render(){
-  return (
-    <div className='Statistic'>
-     
-     <h1 className="title">Please leave feedback</h1>
+  render() {
+    return (
+      <div className="Statistic">
+        <h1 className={css.title}>Please leave feedback</h1>
         <div>
           <button type="button" onClick={this.handleIncrementGood}>
             Good
@@ -46,15 +44,23 @@ render(){
           <button type="button" onClick={this.handleIncrementBad}>
             Bad
           </button>
-    </div> 
-  
-    <div>
-    <h2 className="title">Statistics</h2>
-    <p className="text"> Good:{this.state.good}</p>
-    <p className="text"> Neutrale:{this.state.neutral}</p>
-    <p className="text"> Bad:{this.state.bad}</p>
-    </div>
-    </div>)
-    
-  };
+        </div>
+      </div>
+    );
+  }
 }
+
+// export default Statistic;
+
+// export const Statistic = ()=> {
+//     return (
+//          <div className="Statistic">
+//         <h1 className={css.title}>Please leave feedback</h1>
+//         <div>
+//             <button type="submit">Good</button>
+//             <button type="submit">Neutral</button>
+//             <button type="submit">Bad</button>
+//         </div>
+//     </div>
+//     );
+//    }
