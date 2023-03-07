@@ -1,66 +1,61 @@
 import React from 'react';
-import css from './Statistic.module.css';
+import PropTypes from 'prop-types';
 
-export class Statistic extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
 
-  handleIncrementGood = () => {
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-  handleIncrementNeutral = () => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
+export const Statistic = ({
+  good,
+  neutral,
+  bad,
+  total,
+  positivePercentage,
+}) => {
+  return (
+    <>   
+    <div>
+      <p> Good:{good}</p>
+      <p> Neutrale:{neutral}</p>
+      <p> Bad:{bad}</p>
+      <p> Total:{total}</p>
+      <p> Positive feedback:{positivePercentage}%</p>
+    </div> 
+    </>
+  );
+};
 
-  handleIncrementBad = () => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
-  };
-  render() {
-    return (
-      <div className="Statistic">
-        <h1 className={css.title}>Please leave feedback</h1>
-        <div>
-          <button type="button" onClick={this.handleIncrementGood}>
-            Good
-          </button>
-          <button type="button" onClick={this.handleIncrementNeutral}>
-            Neutral
-          </button>
-          <button type="button" onClick={this.handleIncrementBad}>
-            Bad
-          </button>
-        </div>
-      </div>
-    );
-  }
+Statistic.propType = {
+    good:PropTypes.number.isRequired,
+    neutral:PropTypes.number.isRequired,
+    bad:PropTypes.number.isRequired,
+    total:PropTypes.number,
+    positivePercentage:PropTypes.number,
+
 }
 
-// export default Statistic;
-
-// export const Statistic = ()=> {
+//   render() {
 //     return (
-//          <div className="Statistic">
+//       <div className="Statistic">
 //         <h1 className={css.title}>Please leave feedback</h1>
 //         <div>
-//             <button type="submit">Good</button>
-//             <button type="submit">Neutral</button>
-//             <button type="submit">Bad</button>
+//           <button type="button" onClick={this.handleIncrementGood}>
+//             Good
+//           </button>
+//           <button type="button" onClick={this.handleIncrementNeutral}>
+//             Neutral
+//           </button>
+//           <button type="button" onClick={this.handleIncrementBad}>
+//             Bad
+//           </button>
 //         </div>
-//     </div>
+//         <div>
+//           <h2 className="title">Statistics</h2>
+//           <p className="text"> Good:{this.state.good}</p>
+//           <p className="text"> Neutrale:{this.state.neutral}</p>
+//           <p className="text"> Bad:{this.state.bad}</p>
+//           <p className="text"> Total:{this.countTotalFeedback()}</p>
+//           <p className="text"> Positive feedback:{this.countPositiveFeedbackPercentage()}
+//           </p>
+//         </div>
+//       </div>
 //     );
-//    }
+//   }
+// }

@@ -1,14 +1,16 @@
-//  import { Statistic } from '../components/Statistic/Statistic'
+import { Component } from 'react';
+import { Statistic } from './Statistic/Statistic';
 import React from 'react';
-// import css from './Statistic.module.css';
+import { Feedback } from './Feedback/Feedback';
+import { Section } from './Section/Section';
+import { Notification } from './Notification/Notification';
 
-export class App extends React.Component {
+export class App extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
-
   handleIncrementGood = () => {
     this.setState(prevState => ({
       good: prevState.good + 1,
@@ -26,40 +28,45 @@ export class App extends React.Component {
     }));
   };
 
-  countTotalFeedback = () => {
-    const { good, neutrale, bad } = this.state;
-    return good + neutrale + bad
+  countTotalFeedback() {
+    const { good, neutral, bad } = this.state;
+    let total = 0; 
+     total = good + neutral + bad;
+    return total;
   };
 
-  countPositiveFeedbackPercentage = () => {
-    return Math.round((this.state.good / this.countTotalFeedback()) * 100);
+  countPositiveFeedbackPercentage() {
+    const { good, bad, neutral } = this.state;
+    
+    let count = 0;
+    count = (good / (good + bad + neutral)) * 100;
+    return Math.round(count);
+    // return Math.round((this.state.good / this.countTotalFeedback()) * 100);
   };
 
   render() {
-       return (
-      <div className="Statistic">
-        <h1 className="title">Please leave feedback</h1>
-        <div>
-          <button type="button" onClick={this.handleIncrementGood}>
-            Good
-          </button>
-          <button type="button" onClick={this.handleIncrementNeutral}>
-            Neutral
-          </button>
-          <button type="button" onClick={this.handleIncrementBad}>
-            Bad
-          </button>
-        </div>
+    return (
+      <div>
+        <Section title="Please leave feedback">
+          <Feedback
+            handleIncrementGood={this.handleIncrementGood}
+            handleIncrementNeutral={this.handleIncrementNeutral}
+            handleIncrementBad={this.handleIncrementBad}
+          />
+        </Section>
 
-        <div>
-          <h2 className="title">Statistics</h2>
-          <p className="text"> Good:{this.state.good}</p>
-          <p className="text"> Neutrale:{this.state.neutral}</p>
-          <p className="text"> Bad:{this.state.bad}</p>
-          <p className="text"> Total:{this.countTotalFeedback()}</p>
-          <p className="text"> Positive feedback:{this.countPositiveFeedbackPercentage()}
-          </p>
-        </div>
+        <Section title="Statistics">
+          {this.countTotalFeedback() === 0 ? (
+            <Notification message="There is no feedback"></Notification> 
+          ) : (<Statistic
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />)}
+                  
+        </Section>
       </div>
     );
   }
