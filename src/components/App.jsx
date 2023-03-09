@@ -4,6 +4,7 @@ import React from 'react';
 import { Feedback } from './Feedback/Feedback';
 import { Section } from './Section/Section';
 import { Notification } from './Notification/Notification';
+import css from "./App.module.css";
 
 export class App extends Component {
   state = {
@@ -11,22 +12,30 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  handleIncrementGood = () => {
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
-  };
-  handleIncrementNeutral = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
 
-  handleIncrementBad = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }));
-  };
+  addFeedback =(name)=>{
+    this.setState((prevState) => {return {
+      [name]:prevState[name] + 1
+    }
+
+    }
+  )}
+  // handleIncrementGood = () => {
+  //   this.setState(prevState => ({
+  //     good: prevState.good + 1,
+  //   }));
+  // };
+  // handleIncrementNeutral = () => {
+  //   this.setState(prevState => ({
+  //     neutral: prevState.neutral + 1,
+  //   }));
+  // };
+
+  // handleIncrementBad = () => {
+  //   this.setState(prevState => ({
+  //     bad: prevState.bad + 1,
+  //   }));
+  // };
 
   countTotalFeedback() {
     const { good, neutral, bad } = this.state;
@@ -46,13 +55,17 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className={css.container}>
         <Section title="Please leave feedback">
           <Feedback
+          options={["good", "bad","neutral"]}
+          onLeaveFeedback={this.addFeedback}
+          />
+          {/* <Feedback
             handleIncrementGood={this.handleIncrementGood}
             handleIncrementNeutral={this.handleIncrementNeutral}
             handleIncrementBad={this.handleIncrementBad}
-          />
+          /> */}
         </Section>
 
         <Section title="Statistics">
