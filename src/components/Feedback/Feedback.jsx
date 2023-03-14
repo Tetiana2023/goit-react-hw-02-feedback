@@ -5,15 +5,15 @@ import css from './Feedback.module.css'
 export const Feedback = ({ options, onLeaveFeedback }) => {
   return (
     <>
-       <div className={css.text}>
-        {options.map(option => {
+       <div className={css.text} >
+        {   options.map(option => {
           return (
-            <p  key={option}>
+            <p key={option}>
              
               <button className={css.button} type="button" onClick={() => onLeaveFeedback(option)}>
                 {option}
               </button>
-            </p>
+           </p>
           );
         })}
       </div>
